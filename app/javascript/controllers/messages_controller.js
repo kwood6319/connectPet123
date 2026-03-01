@@ -1,41 +1,65 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static values = { currentUserId: Number }
-
   connect() {
-    this.alignMessages()
-    this.applyAvatars()
-  }
+    this.viewerId = this.element.dataset.viewerId
+    this.petPhotoUrl = this.element.dataset.petPhotoUrl
 
-  alignMessages() {
-    this.element.querySelectorAll(".message").forEach(message => {
-      const senderId = Number(message.dataset.userId)
+    this.applyPerspective()
 
-      if (senderId === this.currentUserIdValue) {
-        message.classList.add("from-me")
-      } else {
-        message.classList.add("from-them")
-      }
+    this.observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType === 1 && node.classList.contains("message")) {
+            this.applyToMessage(node)
+          }
+        })
+      })
+    })
+
+    this.observer.observe(this.element, {
+      childList: true
     })
   }
 
-  applyAvatars() {
-    this.element.querySelectorAll(".message").forEach(message => {
-      const avatar = message.querySelector(".avatar-chat")
-      if (!avatar) return
+  disconnect() {
+    this.observer?.disconnect()
+  }
 
-      const role = message.dataset.userRole
+  applyPerspective() {
+    this.element
+      .querySelectorAll(".message")
+      .forEach(message => this.applyToMessage(message))
+  }
 
-      if (role === "vet") {
-        avatar.src =
-          "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg"
-      } else if (role === "owner") {
-        const petPhotoUrl = message.dataset.petPhotoUrl
-        if (petPhotoUrl && petPhotoUrl.length > 0) {
-          avatar.src = petPhotoUrl
-        }
-      }
-    })
+  applyToMessage(message) {
+    // prevent double-processing
+    if (message.dataset.processed === "true") return
+    message.dataset.processed = "true"
+
+    const senderId = message.dataset.userId
+    const senderRole = message.dataset.userRole
+
+    const bubble = message.querySelector(".msg")
+    const avatarSlot = message.querySelector(".avatar-slot")
+
+    const fromMe = senderId === this.viewerId
+
+    /* alignment */
+    row.classList.add(fromMe ? "msg-right" : "msg-left")
+    bubble.classList.add(fromMe ? "msg-right" : "msg-left")
+
+    /* avatar (ROLE-BASED) */
+    const avatarSrc =
+      senderRole === "vet"
+        ? "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg"
+        : this.petPhotoUrl
+
+    avatarSlot.innerHTML = `
+      <img
+        class="avatar-chat ${fromMe ? "right-avatar" : "left-avatar"}"
+        src="${avatarSrc}"
+      />
+    `
   }
 }

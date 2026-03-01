@@ -1,12 +1,26 @@
-<div
-  class="row mx-2 justify-content-center message"
-  data-user-id="<%= message.user_id %>"
-  data-user-role="<%= message.user.role %>"
-  data-pet-photo-url="<%= message.chat.pet.photo.attached? ? url_for(message.chat.pet.photo) : "" %>">
-  <div class="col-2 avatar-col">
-    <img class="avatar-chat" />
-  </div>
-  <div class="msg col-10">
+<% from_me = message.user_id == viewer_id %>
+<div class="row mx-2 justify-content-center">
+  <% unless from_me %>
+    <!-- LEFT AVATAR -->
+    <div class="col-2 avatar-col">
+      <% if message.user.role == "vet" %>
+        <%= image_tag(
+          "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg",
+          class: "avatar-chat left-avatar"
+        ) %>
+      <% else %>
+        <%= image_tag message.chat.pet.photo, class: "avatar-chat left-avatar" %>
+      <% end %>
+    </div>
+  <% end %>
+  <!-- MESSAGE BUBBLE -->
+  <div class="msg col-10 <%= from_me ? "msg-right" : "msg-left" %>">
     <p><%= message.contents %></p>
   </div>
+  <% if from_me %>
+    <!-- RIGHT AVATAR -->
+    <div class="col-2 avatar-col">
+      <%= image_tag message.chat.pet.photo, class: "avatar-chat right-avatar" %>
+    </div>
+  <% end %>
 </div>

@@ -18,8 +18,9 @@
   class="msg-container"
   id="chat-messages"
   data-controller="scroll messages"
-  data-messages-current-user-id-value="<%= current_user.id %>">
-    <%= render @messages %>
+  data-viewer-id="<%= current_user.id %>"
+  data-pet-photo-url="<%= url_for(@chat.pet.photo) %>">
+    <%= render @messages, viewer_id: current_user.id %>
     <div class="chat-bottom"> </div>
   </div>
   <%= form_with model: [@user, @chat, @message] do |f| %>
@@ -30,15 +31,28 @@
   <% end %>
 </div>
 <style>
-  .message.from-me {
-  flex-direction: row-reverse;
+  .message-row {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
   }
 
-  .message.from-me .msg {
-  background: #dcf8c6;
+  /* RIGHT (from me) */
+  .message-row.msg-right {
+    flex-direction: row-reverse;
   }
 
-  .message.from-them .msg {
-  background: #ffffff;
+  /* LEFT (from them) */
+  .message-row.msg-left {
+    flex-direction: row;
+  }
+
+  /* spacing */
+  .message-row.msg-right .avatar-chat {
+    margin-left: 0.75rem;
+  }
+
+  .message-row.msg-left .avatar-chat {
+    margin-right: 0.75rem;
   }
 </style>
