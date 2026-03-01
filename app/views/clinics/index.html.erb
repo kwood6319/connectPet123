@@ -2,6 +2,10 @@
   <h1>Clinics</h1>
   <div>
     <% @clinics.each do |clinic| %>
+    <%= cl_image_tag clinic.photo.key,
+      crop: :fill,
+      gravity: :auto,
+      class: "img-fluid w-100 clinic-banner-mobile" %>
       <h2><%= link_to clinic.clinic_name, clinic %></h2>
       <h4>We provide medical care for</h4>
       <% clinic.species.each do |specie| %>
