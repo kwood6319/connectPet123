@@ -14,7 +14,11 @@
 </div>
 <div class="msg-container-wrapper">
   <%= turbo_stream_from "chat_#{@chat.id}" %>
-  <div class="msg-container" id="chat-messages" data-controller="scroll" data-scroll-target="container">
+  <div
+  class="msg-container"
+  id="chat-messages"
+  data-controller="scroll messages"
+  data-messages-current-user-id-value="<%= current_user.id %>">
     <%= render @messages %>
     <div class="chat-bottom"> </div>
   </div>
@@ -25,3 +29,16 @@
     </button>
   <% end %>
 </div>
+<style>
+  .message.from-me {
+  flex-direction: row-reverse;
+  }
+
+  .message.from-me .msg {
+  background: #dcf8c6;
+  }
+
+  .message.from-them .msg {
+  background: #ffffff;
+  }
+</style>

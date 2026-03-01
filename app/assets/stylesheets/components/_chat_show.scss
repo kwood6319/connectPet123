@@ -1,14 +1,21 @@
+html,
+body {
+  height: 100%;
+}
+
 .msg-container-wrapper {
-  height: 100vh;
+  height: calc(100vh - 4rem);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .msg-container {
   margin-top: 1rem;
-  flex-grow: 1;
-  overflow: scroll;
+  padding-bottom: 2rem;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
 }
 
 // sub-nav bar
@@ -91,7 +98,11 @@ p {
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  display: block;
+}
+
+.avatar-col {
+  flex: 0 0 60px;
+  max-width: 60px;
 }
 
 .right-avatar{
