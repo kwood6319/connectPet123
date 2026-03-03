@@ -16,9 +16,18 @@
 
           <div class="name-section-wrapper">
             <h2 class="pet-name-index"><%= pet.name %></h2>
+            <% case pet.name %>
+            <% when "Raye"%>
+              <p> Tracking: </p>
+              <div class="tracked_attributes"> <i class="fa-solid fa-bowl-food fa-1x"></i><i class="fa-solid fa-n"></i><i class="fa-solid fa-toilet"></i> </div>
+            <% when "Percy"%>
+              <p> Tracking: </p>
+              <div class="tracked_attributes"> <i class="fa-solid fa-bowl-food"></i><i class="fa-solid fa-n"></i><i class="fa-solid fa-toilet"></i></div>
+            <% when "Cory"%>
+              <p> Tracking: </p>
+              <div class="tracked_attributes"> <i class="fa-solid fa-bowl-food"></i><i class="fa-solid fa-toilet"></i></div>
+            <% end %>
           </div>
-
-          <%# icons: calendar and restore %>
           <% if @title == "Your Pets!" %>
             <i class="fa-solid fa-calendar-plus"
                onclick="event.preventDefault(); window.location.href='<%= new_user_pet_log_path(current_user, pet) %>';">
@@ -31,7 +40,7 @@
               style: "background-color: #A3B899; border: none; border-radius: 5px; padding: 5px; cursor: pointer;",
               form: { onclick: "event.stopPropagation();", style: "display:inline; background-color: #A3B899; border: none; border-radius: 5px; padding: 5px; cursor: pointer;" },
               data: { turbo_confirm: "Restore #{pet.name}?" } do %>
-                <i class="fa-solid fa-arrow-rotate-left"></i>
+              <i class="fa-solid fa-arrow-rotate-left"></i>
             <% end %>
           <% end %>
         </div>
@@ -48,33 +57,15 @@
 
     <% end %>
   </div>
-
-  <%# Clinics %>
   <% if @title == "Your Pets!" %>
-    <h3 class="index-title">Your Connected Veterinarians</h3>
-    <div class="vet-cards-wrapper">
-      <% @clinics.each do |clinic| %>
-        <%= link_to clinic_path(clinic), class: "card-index-link" do %>
-          <div class="card-index">
-            <%# Protecting view from nil data %>
-            <% if clinic&.photo&.attached? %>
-              <%= cl_image_tag clinic.photo.key, crop: :fill, class: "avatar-index-large" %>
-            <% else %>
-              <div class="avatar-index-large placeholder">
-                <i class="fa-regular fa-hospital"></i>
-              </div>
-            <% end %>
-            <div class="name-section-wrapper">
-              <h3 class="vet-name-index"><%= clinic.clinic_name %></h3>
-            </div>
-
-              <i class="fa-solid fa-comment"
-               onclick="event.preventDefault(); window.location.href='<%= new_user_chat_path(current_user) %>';">
-              </i>
-
-          </div>
-        <% end %>
-      <% end %>
+    <h3 class="mt-4">Your Connected Veterinarians</h3>
+    <div class="vet-card-custom">
+      <%= image_tag "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg", class: "avatar-vet" %>
+      <div class="name-section-wrapper">
+        <div class="vet-name-index">Patrick Gregory House</div>
+        <div class="vet-languages">Languages: English, Spanish</div>
+      </div>
+      <i class="fa-solid fa-comment"></i>
     </div>
   <% end %>
 </div>
