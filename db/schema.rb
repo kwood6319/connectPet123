@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_03_104035) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_26_110448) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -128,7 +128,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_03_104035) do
     t.string "attr3"
     t.string "attr4"
     t.string "attr5"
-    t.boolean "archived", default: false
     t.index ["user_id"], name: "index_pets_on_user_id"
   end
 
