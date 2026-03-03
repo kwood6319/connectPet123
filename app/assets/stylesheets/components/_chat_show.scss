@@ -38,54 +38,26 @@ body {
 
 // messages
 
-// .msg {
-//   position: relative;
-//   border-radius: 8px;
-//   font-size: 14px;
-//   line-height: 1.4;
-//   max-width: 70%;
-//   padding: 12px 18px;
-//   margin-bottom: 10px;
-//   z-index: 1;
-//   font-weight: bold;
-// }
-
-
-// p {
-//   margin-bottom: 0;
-// }
-
-// .col-2:has(.left-avatar),
-// .col-2:has(.right-avatar) {
-//   padding-left: 0;
-//   padding-right: 0;
-// }
-
-.avatar-chat {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-// .right-avatar{
-//   margin-left: 0.75rem;
-// }
-
-// .left-avatar{
-//   margin-right: 0.75rem;
-// }
-
 .message {
   display: flex;
   align-items: flex-end;
   margin-bottom: 10px;
 }
 
-.msg p {
-  // text-align: center;
+.msg {
+  position: relative;
+  font-size: 14px;
+  line-height: 1.4;
+  max-width: 70%;
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  z-index: 1;
+  font-weight: bold;
 }
 
+.msg p {
+  margin: 0;
+}
 
 /* LEFT MESSAGE */
 .msg-left {
@@ -107,7 +79,14 @@ body {
   border-radius: 15px 15px 0 15px;
 }
 
-/* Avatar positioning */
+/* Avatar */
+.avatar-chat {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .msg-left .avatar-slot {
   order: 0;
 }
@@ -122,10 +101,6 @@ body {
 
 .msg-right .msg {
   order: 0;
-}
-
-p {
-  padding: 2px;
 }
 
 .col-2:has(.left-avatar) {
