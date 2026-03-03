@@ -78,10 +78,8 @@ raye = Pet.create!(
 
 # cloudinary
 raye_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651747/development/reye.jpg"
-unless raye.photo.attached?
-  puts "Accessing cloudinary for raye's photo"
-  raye.photo.attach(io: URI.open(raye_url), filename: "raye.jpg", content_type: "image/jpg")
-end
+puts "Accessing cloudinary for raye's photo"
+raye.photo.attach(io: URI.open(raye_url), filename: "raye.jpg", content_type: "image/jpg")
 raye.save!
 puts "Raye created"
 
@@ -152,10 +150,8 @@ cory = Pet.create!(
 
 # cloudinary
 cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/development/corey.jpg"
-unless cory.photo.attached?
-  cory.photo.attach(io: URI.open(cory_url), filename: "cory.jpg", content_type: "image/jpg")
-  puts "Accessing cloudinary for Cory's photo"
-end
+cory.photo.attach(io: URI.open(cory_url), filename: "cory.jpg", content_type: "image/jpg")
+puts "Accessing cloudinary for Cory's photo"
 cory.save!
 puts "Cory created"
 
@@ -218,10 +214,8 @@ maple = Pet.create!(
 
 # cloudinary
 maple_url = "https://res.cloudinary.com/rts1307/image/upload/v1771497608/development/maple.png"
-unless maple.photo.attached?
-  maple.photo.attach(io: URI.open(maple_url), filename: "maple.png", content_type: "image/png")
-  puts "Accessing cloudinary for Maples's photo"
-end
+maple.photo.attach(io: URI.open(maple_url), filename: "maple.png", content_type: "image/png")
+puts "Accessing cloudinary for Maples's photo"
 maple.save!
 puts "Maple created"
 
@@ -253,10 +247,8 @@ gabby = Pet.create!(
 
 # cloudinary
 gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1771659086/development/gabby.jpg"
-unless gabby.photo.attached?
-  gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.jpg", content_type: "image/jpg")
-  puts "Accessing cloudinary for Gabby's photo"
-end
+gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.jpg", content_type: "image/jpg")
+puts "Accessing cloudinary for Gabby's photo"
 gabby.save!
 puts "Gabby created"
 
@@ -288,10 +280,8 @@ jade = Pet.create!(
 
 # cloudinary
 jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1771659087/development/jade.jpg"
-unless jade.photo.attached?
-  jade.photo.attach(io: URI.open(jade_url), filename: "jade.jpg", content_type: "image/jpg")
-  puts "Accessing cloudinary for Jade's photo"
-end
+jade.photo.attach(io: URI.open(jade_url), filename: "jade.jpg", content_type: "image/jpg")
+puts "Accessing cloudinary for Jade's photo"
 jade.save!
 puts "Jade created"
 
@@ -322,10 +312,8 @@ lewagon =Clinic.create!(
 
 # cloudinary
 lewagon_url = "https://res.cloudinary.com/rts1307/image/upload/v1772466537/development/LewagonPetClinic.png"
-unless lewagon.photo.attached?
-  lewagon.photo.attach(io: URI.open(lewagon_url), filename: "lewagon.png", content_type: "image/png")
-  puts "Accessing cloudinary for Jade's photo"
-end
+lewagon.photo.attach(io: URI.open(lewagon_url), filename: "lewagon.png", content_type: "image/png")
+puts "Accessing cloudinary for Jade's photo"
 lewagon.save!
 puts "Le Wagon Clinic created"
 
@@ -352,10 +340,8 @@ sos_pet = Clinic.create!(
 
 # cloudinary
 sos_pet_url = "https://res.cloudinary.com/rts1307/image/upload/v1772466538/development/SOSpet.png"
-unless sos_pet.photo.attached?
-  sos_pet.photo.attach(io: URI.open(sos_pet_url), filename: "sos_pet.png", content_type: "image/png")
-  puts "Accessing cloudinary for SOS Pet's photo"
-end
+sos_pet.photo.attach(io: URI.open(sos_pet_url), filename: "sos_pet.png", content_type: "image/png")
+puts "Accessing cloudinary for SOS Pet's photo"
 sos_pet.save!
 puts "SOS Pet Clinic created"
 
@@ -383,10 +369,8 @@ pet_protect = Clinic.create!(
 
   # cloudinary
 pet_protect_url = "https://res.cloudinary.com/rts1307/image/upload/v1772466539/development/PetProtect.png"
-unless pet_protect.photo.attached?
-  pet_protect.photo.attach(io: URI.open(pet_protect_url), filename: "pet_protect.png", content_type: "image/png")
-  puts "Accessing cloudinary for SOS Pet's photo"
-end
+pet_protect.photo.attach(io: URI.open(pet_protect_url), filename: "pet_protect.png", content_type: "image/png")
+puts "Accessing cloudinary for SOS Pet's photo"
 pet_protect.save!
 puts "Pet Protect Clinic created"
 
