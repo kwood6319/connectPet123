@@ -25,7 +25,7 @@
       </div>
     </div>
   </div>
-  <%= turbo_frame_tag "pet_details" do %>
+  <%= turbo_frame_tag "pet_details", target: "modal" do %>
     <div class="text-center">
       <h1 class="pet-name-title"><%= @pet.name %></h1>
       <p class="pet-subtitle">
@@ -37,37 +37,54 @@
       <div class="vital-grid">
         <%# DOB %>
         <div class="vital-card">
-          <i class="fa-solid fa-pencil edit-pencil"></i>
+          <%= link_to edit_user_pet_path(@user, @pet, field: 'dob'), data: { turbo_frame: "modal" } do %>
+            <i class="fa-solid fa-pencil edit-pencil"></i>
+          <% end %>
           <i class="fa-solid fa-calendar-days card-icon"></i>
           <span class="card-label">Date of Birth:</span>
           <span class="card-value"><%= @pet.dob.strftime("%Y/%m/%d") if @pet.dob %></span>
         </div>
+        <%# Vaccines %>
         <div class="vital-card">
-          <i class="fa-solid fa-pencil edit-pencil"></i>
+          <%= link_to edit_user_pet_path(@user, @pet, field: 'vacc_status'), data: { turbo_frame: "modal" } do %>
+            <i class="fa-solid fa-pencil edit-pencil"></i>
+          <% end %>
           <i class="fa-solid fa-syringe card-icon"></i>
           <span class="card-label">Vaccines:</span>
           <span class="card-value"><%= @pet.vacc_status %></span>
         </div>
+        <%# Microchip %>
         <div class="vital-card">
-          <i class="fa-solid fa-pencil edit-pencil"></i>
+          <%= link_to edit_user_pet_path(@user, @pet, field: 'microchip'), data: { turbo_frame: "modal" } do %>
+            <i class="fa-solid fa-pencil edit-pencil"></i>
+          <% end %>
           <i class="fa-solid fa-microchip card-icon"></i>
           <span class="card-label">Microchip:</span>
           <span class="card-value"><%= @pet.microchip.presence || "None" %></span>
         </div>
+        <%# Weight %>
         <div class="vital-card">
-          <i class="fa-solid fa-pencil edit-pencil"></i>
+          <%= link_to edit_user_pet_path(@user, @pet, field: 'weight'), data: { turbo_frame: "modal" } do %>
+            <i class="fa-solid fa-pencil edit-pencil"></i>
+          <% end %>
           <i class="fa-solid fa-weight-hanging card-icon"></i>
           <span class="card-label">Weight:</span>
           <span class="card-value"><%= @pet.weight %> kg</span>
         </div>
+        <%# Medications %>
         <div class="vital-card">
-          <i class="fa-solid fa-pencil edit-pencil"></i>
+          <%= link_to edit_user_pet_path(@user, @pet, field: 'current_meds'), data: { turbo_frame: "modal" } do %>
+            <i class="fa-solid fa-pencil edit-pencil"></i>
+          <% end %>
           <i class="fa-solid fa-capsules card-icon"></i>
           <span class="card-label">Medications:</span>
           <span class="card-value"><%= @pet.current_meds.presence || "None" %></span>
         </div>
+        <%# Notes %>
         <div class="vital-card">
-          <i class="fa-solid fa-pencil edit-pencil"></i>
+          <%= link_to edit_user_pet_path(@user, @pet, field: 'notes'), data: { turbo_frame: "modal" } do %>
+            <i class="fa-solid fa-pencil edit-pencil"></i>
+          <% end %>
           <i class="fa-solid fa-note-sticky card-icon"></i>
           <span class="card-label">Notes:</span>
           <span class="card-value"><%= @pet.notes.presence || "No notes yet" %></span>

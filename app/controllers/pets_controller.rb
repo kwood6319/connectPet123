@@ -1,7 +1,7 @@
 class PetsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
-  before_action :set_pet, only: [:show, :archive]
+  before_action :set_pet, only: [:show, :archive, :edit, :update]
 
   # GET /users/:user_id/pets
   def index
@@ -35,6 +35,19 @@ class PetsController < ApplicationController
       redirect_to [@user, @pet], notice: 'Pet was successfully registered!'
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    @field = params[:field]
+  end
+
+  def update
+    @pet = @user.pets.find(params[:id])
+    if @pet.update(pet_params)
+      redirect_to user_pet_path(@user, @pet), notice: "Updated!"
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

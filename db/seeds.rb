@@ -78,10 +78,10 @@ raye = Pet.create!(
 
 # cloudinary
 raye_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651747/development/reye.jpg"
-unless raye.photo.attached?
+# unless raye.photo.attached?
   puts "Accessing cloudinary for raye's photo"
   raye.photo.attach(io: URI.open(raye_url), filename: "raye.jpg", content_type: "image/jpg")
-end
+# end
 raye.save!
 puts "Raye created"
 
