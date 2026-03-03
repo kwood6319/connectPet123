@@ -12,3 +12,6 @@ application.register("hello", HelloController)
 
 import RatingController from "./rating_controller"
 application.register("rating", RatingController)
+
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
+eagerLoadControllersFrom("controllers", application)

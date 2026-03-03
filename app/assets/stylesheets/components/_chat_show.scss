@@ -1,14 +1,21 @@
-.msg-container-wrapper {
+html,
+body {
   height: 100vh;
+}
+
+.msg-container-wrapper {
+  height: calc(100vh - 4rem);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .msg-container {
   margin-top: 1rem;
-  flex-grow: 1;
-  overflow: scroll;
+  padding-bottom: 2rem;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
 }
 
 // sub-nav bar
@@ -31,9 +38,14 @@
 
 // messages
 
+.message {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
 .msg {
   position: relative;
-  border-radius: 8px;
   font-size: 14px;
   line-height: 1.4;
   max-width: 70%;
@@ -43,58 +55,65 @@
   font-weight: bold;
 }
 
-.msg-right {
-  background: #6aa98f;
+.msg p {
+  margin: 0;
 }
 
-.msg-right::after {
-  content: "";
-  position: absolute;
-  right: -5px;            /* move outside bubble */
-  top: 50%;               /* vertical center */
-  transform: translateY(-50%) rotate(150deg);
-  width: 12px;
-  height: 12px;
-  background: #6aa98f;
-  border-radius: 0 100% 100% 100%;
-  z-index: -1;
-}
-
+/* LEFT MESSAGE */
 .msg-left {
+  justify-content: flex-start;
+}
+
+.msg-left .msg {
   background: #A3B899;
+  border-radius: 15px 15px 15px 0;
 }
 
-.msg-left::after{
-  content: "";
-  position: absolute;
-  left: -5px;            /* move outside bubble */
-  top: 50%;               /* vertical center */
-  transform: translateY(-50%) rotate(330deg);
-  width: 12px;
-  height: 12px;
-  background: #A3B899;
-  border-radius: 0 100% 100% 100%;
+/* RIGHT MESSAGE */
+.msg-right {
+  justify-content: flex-end;
 }
 
-p {
-  margin-bottom: 0;
+.msg-right .msg {
+  background: #6aa98f;
+  border-radius: 15px 15px 0 15px;
 }
 
-.col-2:has(.left-avatar),
-.col-2:has(.right-avatar) {
+/* Avatar */
+.avatar-chat {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.msg-left .avatar-slot {
+  order: 0;
+}
+
+.msg-left .msg {
+  order: 1;
+}
+
+.msg-right .avatar-slot {
+  order: 1;
+}
+
+.msg-right .msg {
+  order: 0;
+}
+
+.col-2:has(.left-avatar) {
   padding-left: 0;
   padding-right: 0;
 }
 
-.right-avatar{
-  margin-left: 0.75rem;
+.col-2:has(.right-avatar) {
+  padding-left: 8px;
+  padding-right: 0;
 }
 
-.left-avatar{
-  margin-right: 0.75rem;
-}
-
-// new message
+// new message form
 
 form {
   position: sticky;
