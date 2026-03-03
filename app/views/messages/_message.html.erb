@@ -1,6 +1,8 @@
+<%# very raw structre as adding css classes is handled by the JS messages controller %>
 <div class="message row mx-2 justify-content-center"
      data-user-id="<%= message.user_id %>"
      data-user-role="<%= message.user.role %>">
+  <%# passes information needed to the controller %>
   <div class="col-2 avatar-col avatar-slot"></div>
   <div class="col-10 msg">
     <p><%= message.contents %></p>
