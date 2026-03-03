@@ -5,14 +5,16 @@ class ChatsController < ApplicationController
 
   def index
     # Make it so we can only see chats where the user is either owner or vet -> could be made better with pundit?
-    @chats = Chat.where("owner_id = ? OR vet_id = ?", @user.id, @user.id)
+    @chats = Chat.where("owner_id = ? OR vet_id = ?", @user.id, @user.id).includes(:pet)
 
     if params[:archived] == "true"
       @chats = @chats.archived
       @is_archived_view = true
+      @chat_title = "Archived Chats"
     else
       @chats = Chat.where("owner_id = ? OR vet_id = ?", @user.id, @user.id)
       @is_archived_view = false
+      @chat_title = "Inbox"
     end
   end
 
@@ -21,6 +23,8 @@ class ChatsController < ApplicationController
     #messages shown by order
     @messages = @chat.messages.includes(:user).order(:created_at)
     @message = @chat.messages.build
+
+    @pet = @chat.pet
   end
 
   def new
@@ -74,7 +78,7 @@ class ChatsController < ApplicationController
   end
 
   def set_chat
-    @chat = Chat
+    @chat = Chat.unscoped
             .where("owner_id = ? OR vet_id = ?", @user.id, @user.id)
             .find_by(id: params[:id])
 

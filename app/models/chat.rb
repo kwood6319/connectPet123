@@ -1,7 +1,7 @@
 class Chat < ApplicationRecord
   belongs_to :owner, class_name: "User"
   belongs_to :vet, class_name: "User"
-  belongs_to :pet
+  belongs_to :pet, -> { unscope(where: :archived) } # Allow verification of archived pets
   has_many :messages, dependent: :destroy
   accepts_nested_attributes_for :messages
 

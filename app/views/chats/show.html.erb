@@ -8,7 +8,7 @@
     <% if @user == @chat.owner %>
       <%= @chat.vet.clinic.clinic_name %>
     <% else %>
-      <%= @chat.owner.name %>: <%= @chat.pet.name %>
+      <%= @chat.owner.name %>: <%= @chat.pet.name || "Unknow pet"%>
     <% end %>
   </div>
 </div>

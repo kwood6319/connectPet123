@@ -1,34 +1,45 @@
 <div class="container">
+  <h1 class="index-title mb-3" style="text-align: center";><%= @chat_title %></h1>
   <% @chats.each do |chat| %>
     <div class="row msg-card">
       <div class="avatar-section col-4">
         <%= image_tag "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg",
               class: "avatar-small", style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
+
+        <%# If a pet doesn't have a picture, a paw icon will be used %>
+        <%# When a pet goes to Heart Gallery, the chat picture is not available %>
+        <% if chat.pet&.photo&.attached? %>
         <%= image_tag chat.pet.photo,
               class: "avatar-small overlap",
               style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
+        <% else %>
+          <div class="avatar-small overlap" style="width: 50px; height: 50px; border-radius: 50%; background: #eee; display: inline-flex; align-items: center; justify-content: center; border: 2px solid white;">
+            <i class="fa-solid fa-paw" style="color: #bbb;"></i>
+          </div>
+        <% end %>
+
       </div>
       <div class="col-5">
         <%= link_to user_chat_path(@user, chat) do %>
           <h5> <%= chat.vet.clinic.clinic_name %> </h5>
-          <h6> For: <%= chat.pet.name %> </h6>
+          <h6> For: <%= chat.pet&.name || "Unknown Pet" %> </h6>
         <% end %>
       </div>
       <div class="col-3">
-        <% if chat.messages.last.updated_at.today? %>
+        <% if chat.messages.last&.updated_at&.today? %>
           <p> <%= chat.messages.last.updated_at.in_time_zone('Tokyo').strftime("%m:%M%p")%> </p>
         <% else %>
-          <%= chat.messages.last.updated_at.strftime("%m/%e") %>
+          <%= chat.messages.last&.updated_at&.strftime("%m/%e") %>
         <% end %>
         <% if chat.archived? %>
           <%# Unarchiving the chat %>
           <%= link_to unarchive_user_chat_path(current_user, chat), data: { turbo_method: :patch, turbo_confirm: "Unarchive this chat?"} do %>
-            <h3><i class="fa-solid fa-box-archive" style="color:blue"></i></h3>
+            <h3><i class="fa-regular fa-eye" style="color: #A3B899"></i></h3>
           <% end %>
         <% else %>
           <%# Archiving the chat %>
           <%= link_to archive_user_chat_path(current_user, chat), data: { turbo_method: :patch, turbo_confirm: "Archive this chat?"} do %>
-            <h3><i class="fa-solid fa-box-archive" style="color:red"></i></h3>
+            <h3><i class="fa-regular fa-eye-slash" style="color: #6c757d"></i></h3>
           <% end %>
         <% end %>
       </div>

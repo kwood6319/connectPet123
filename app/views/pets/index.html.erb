@@ -1,10 +1,11 @@
 <div class="pet-index-container">
-  <h1 class="index-title">Your Pets!</h1>
+  <h1 class="index-title"><%= @title %></h1>
   <div class="pet-cards-wrapper">
     <% @pets.each do |pet| %>
       <%= link_to user_pet_path(current_user, pet), class: "card-index-link" do %>
         <div class="card-index">
-          <% if pet.photo.attached? %>
+          <%# Protecting view from nil data %>
+          <% if pet&.photo&.attached? %>
             <%= cl_image_tag pet.photo.key, crop: :fill, class: "avatar-index-large" %>
           <% else %>
             <div class="avatar-index-large placeholder">
@@ -14,13 +15,27 @@
           <div class="name-section-wrapper">
             <h2 class="pet-name-index"><%= pet.name %></h2>
           </div>
-          <i class="fa-solid fa-calendar-plus"
+
+          <% if @title == "Your Pets!" %>
+            <i class="fa-solid fa-calendar-plus"
              onclick="event.preventDefault(); window.location.href='<%= new_user_pet_log_path(current_user, pet) %>';">
-          </i>
+            </i>
+          <% else %>
+            <%= button_to unarchive_user_pet_path(current_user, pet),
+              method: :patch,
+              style: "background-color: #A3B899; border: none; border-radius: 5px; padding: 5px; cursor: pointer;",
+              class: "btn-reset-icon",
+              form: { onclick: "event.stopPropagation();", style: "display:inline; background-color: #A3B899;  border: none; border-radius: 5px; padding: 5px; cursor: pointer;" },
+              data: { turbo_confirm: "Restore #{pet.name}?" } do %>
+                <i class="fa-solid fa-arrow-rotate-left"></i>
+              <% end %>
+          <% end %>
         </div>
       <% end %>
     <% end %>
   </div>
+
+  <% if @title == "Your Pets!" %>
   <h3 class="mt-4">Your Connected Veterinarians</h3>
   <div class="vet-card-custom">
     <%= image_tag "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg", class: "avatar-vet" %>
@@ -30,4 +45,5 @@
     </div>
     <i class="fa-solid fa-comment"></i>
   </div>
+  <% end %>
 </div>

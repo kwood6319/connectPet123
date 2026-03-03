@@ -29,7 +29,16 @@
               <div class="dropdown-divider"></div>
               <%= link_to "Add Log for #{@pet.name}", new_user_pet_log_path(current_user, @pet), class: "dropdown-item" %>
               <%= link_to "#{@pet.name}’s Logs", user_pet_logs_path(current_user, @pet), class: "dropdown-item" %>
+
+              <%# Link to move pet to Heart Gallery%>
+              <%= link_to "Move to Heart Gallery", archive_user_pet_path(current_user, @pet), data: {turbo_method: :patch, turbo_confirm: "Move #{@pet.name} to Heart Gallery?"}, class: "dropdown-item" %>
             <% end %>
+
+            <%# Link to archived pets, if exist %>
+            <% if current_user.pets.archived.any? %>
+              <%= link_to "Heart Gallery", user_pets_path(current_user, archived: true), class: "dropdown-item" %>
+            <% end %>
+
             <div class="dropdown-divider"></div>
             <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item text-danger" %>
           </div>

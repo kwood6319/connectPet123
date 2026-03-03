@@ -10,6 +10,7 @@ connection = ActiveRecord::Base.connection
 # CASCADE: Ignores link errors between tables.
 connection.execute("TRUNCATE messages, logs, friendships, chats, pets, clinics, users RESTART IDENTITY CASCADE")
 
+
 puts "Database cleaned! Creating new data..."
 
 puts "Creating users..."
@@ -75,10 +76,28 @@ raye = Pet.create!(
   microchip: "111 111 111 111 111"
 )
 
-raye_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651747/development/44856863-8493-4139-9498-22b38045ad1f_1.jpg"
-raye.photo.attach(io: URI.open(raye_url), filename: "raye.jpg", content_type: "image/jpg")
+# cloudinary
+raye_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651747/development/reye.jpg"
+unless raye.photo.attached?
+  puts "Accessing cloudinary for raye's photo"
+  raye.photo.attach(io: URI.open(raye_url), filename: "raye.jpg", content_type: "image/jpg")
+end
 raye.save!
 puts "Raye created"
+
+# local image
+# raye_file_path = Rails.root.join("app/assets/images/seeds/pets/raye.jpg")
+# if File.exist?(raye_file_path)
+#   raye.photo.attach(
+#     io: File.open(raye_file_path),
+#     filename: "raye.jpg",
+#     content_type: "image/jpg"
+#   )
+#   raye.save!
+#   puts "Raye created with local photo"
+# else
+#   puts "ERROR: file not found"
+# end
 
 percy = Pet.create!(
   user: katie,
@@ -96,10 +115,25 @@ percy = Pet.create!(
   microchip: "111 111 111 111 112"
 )
 
-percy_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651750/development/4cdbca27-d28f-4a0f-938b-d543347b384e_1.jpg"
+# cloudinary
+percy_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651750/development/percy.jpg"
 percy.photo.attach(io: URI.open(percy_url), filename: "percy.jpg", content_type: "image/jpg")
 percy.save!
 puts "Percy created"
+
+# local image
+# percy_file_path = Rails.root.join("app/assets/images/seeds/pets/percy.jpg")
+# if File.exist?(percy_file_path)
+#   percy.photo.attach(
+#     io: File.open(percy_file_path),
+#     filename: "percy.jpg",
+#     content_type: "image/jpg"
+#   )
+#   percy.save!
+#   puts "Percy created with local photo"
+# else
+#   puts "ERROR: file not found"
+# end
 
 cory = Pet.create!(
   user: katie,
@@ -116,10 +150,28 @@ cory = Pet.create!(
   microchip: "111 111 111 111 113"
 )
 
-cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/development/fa4678a3-74b6-470c-ab7d-adecf92b4dcf_1.jpg"
-cory.photo.attach(io: URI.open(cory_url), filename: "cory.jpg", content_type: "image/jpg")
+# cloudinary
+cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/development/corey.jpg"
+unless cory.photo.attached?
+  cory.photo.attach(io: URI.open(cory_url), filename: "cory.jpg", content_type: "image/jpg")
+  puts "Accessing cloudinary for Cory's photo"
+end
 cory.save!
 puts "Cory created"
+
+# local image
+# cory_file_path = Rails.root.join("app/assets/images/seeds/pets/cory.jpg")
+# if File.exist?(cory_file_path)
+#   cory.photo.attach(
+#     io: File.open(cory_file_path),
+#     filename: "cory.jpg",
+#     content_type: "image/jpg"
+#   )
+#   cory.save!
+#   puts "Cory created with local photo"
+# else
+#   puts "ERROR: file not found"
+# end
 
 big_tex = Pet.create!(
   user: katie,
@@ -135,6 +187,7 @@ big_tex = Pet.create!(
   attr2: "Toilet",
 )
 
+puts "Big Tex created"
 
 jonathan = Pet.create!(
   user: katie,
@@ -149,6 +202,7 @@ jonathan = Pet.create!(
   attr1: "Food",
   attr2: "Toilet",
 )
+puts "Jonathan created"
 
 maple = Pet.create!(
   user: renato,
@@ -162,10 +216,28 @@ maple = Pet.create!(
   gender: "Female"
 )
 
-maple_url = "https://res.cloudinary.com/rts1307/image/upload/v1771497608/development/3qil42klx2nl1isfom3yeg90g3n4.png"
-maple.photo.attach(io: URI.open(maple_url), filename: "maple.png", content_type: "image/png")
+# cloudinary
+maple_url = "https://res.cloudinary.com/rts1307/image/upload/v1771497608/development/maple.png"
+unless maple.photo.attached?
+  maple.photo.attach(io: URI.open(maple_url), filename: "maple.png", content_type: "image/png")
+  puts "Accessing cloudinary for Maples's photo"
+end
 maple.save!
 puts "Maple created"
+
+# local image
+# maple_file_path = Rails.root.join("app/assets/images/seeds/pets/maple.png")
+# if File.exist?(maple_file_path)
+#   maple.photo.attach(
+#     io: File.open(maple_file_path),
+#     filename: "maple.png",
+#     content_type: "image/png"
+#   )
+#   maple.save!
+#   puts "Maple created with local photo"
+# else
+#   puts "ERROR: file not found"
+# end
 
 gabby = Pet.create!(
   user: troy,
@@ -179,10 +251,28 @@ gabby = Pet.create!(
   gender: "Male",
 )
 
-# gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1772105196/development/miikco4bamlfkje265ulnl7yaro1.jpg"
-# gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.jpg", content_type: "image/jpg")
+# cloudinary
+gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1771659086/development/gabby.jpg"
+unless gabby.photo.attached?
+  gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.jpg", content_type: "image/jpg")
+  puts "Accessing cloudinary for Gabby's photo"
+end
 gabby.save!
 puts "Gabby created"
+
+# local image
+# gabby_file_path = Rails.root.join("app/assets/images/seeds/pets/gabby.jpg")
+# if File.exist?(gabby_file_path)
+#   gabby.photo.attach(
+#     io: File.open(gabby_file_path),
+#     filename: "gabby.jpg",
+#     content_type: "image/jpg"
+#   )
+#   gabby.save!
+#   puts "Gabby created with local photo"
+# else
+#   puts "ERROR: file not found"
+# end
 
 jade = Pet.create!(
   user: troy,
@@ -196,22 +286,63 @@ jade = Pet.create!(
   gender: "Female",
 )
 
-# jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1772105201/development/e9xpwkhk9hjejadsqiixurbhw7ie.jpg"
-# jade.photo.attach(io: URI.open(jade_url), filename: "jade.jpg", content_type: "image/jpg")
+# cloudinary
+jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1771659087/development/jade.jpg"
+unless jade.photo.attached?
+  jade.photo.attach(io: URI.open(jade_url), filename: "jade.jpg", content_type: "image/jpg")
+  puts "Accessing cloudinary for Jade's photo"
+end
 jade.save!
 puts "Jade created"
 
+#local image
+# jade_file_path = Rails.root.join("app/assets/images/seeds/pets/jade.jpg")
+# if File.exist?(jade_file_path)
+#   jade.photo.attach(
+#     io: File.open(jade_file_path),
+#     filename: "jade.jpg",
+#     content_type: "image/jpg"
+#   )
+#   jade.save!
+#   puts "Jade created with local photo"
+# else
+#   puts "ERROR: file not found"
+# end
+
+
 puts "Making clinics"
 
-Clinic.create!(
+lewagon =Clinic.create!(
   field: ["cardiology", "dentist"],
-  clinic_name:"Pet Forest",
+  clinic_name:"Le Wagon Pet Clinic",
   contact: "contact@pet_forest.com",
   species: ["cats", "dogs", "horses"],
   user: vet01
   )
 
-Clinic.create!(
+# cloudinary
+lewagon_url = "https://res.cloudinary.com/rts1307/image/upload/v1772466537/development/LewagonPetClinic.png"
+unless lewagon.photo.attached?
+  lewagon.photo.attach(io: URI.open(lewagon_url), filename: "lewagon.png", content_type: "image/png")
+  puts "Accessing cloudinary for Jade's photo"
+end
+lewagon.save!
+puts "Le Wagon Clinic created"
+
+# lewagon_file_path = Rails.root.join("app/assets/images/seeds/clinics/LewagonPetClinic.png")
+# if File.exist?(lewagon_file_path)
+#   lewagon.photo.attach(
+#     io: File.open(lewagon_file_path),
+#     filename: "LewagonPetClinic.png",
+#     content_type: "image/png"
+#   )
+#   lewagon.save!
+#   puts "Le Wagon Pet Clinic created with local photo"
+# else
+#   puts "ERROR: file not found"
+# end
+
+sos_pet = Clinic.create!(
   field: ["Oncology","surgery"],
   clinic_name:"SOS Pet",
   contact: "contact@sospet.com",
@@ -219,13 +350,59 @@ Clinic.create!(
   user: vet02
   )
 
-Clinic.create!(
+# cloudinary
+sos_pet_url = "https://res.cloudinary.com/rts1307/image/upload/v1772466538/development/SOSpet.png"
+unless sos_pet.photo.attached?
+  sos_pet.photo.attach(io: URI.open(sos_pet_url), filename: "sos_pet.png", content_type: "image/png")
+  puts "Accessing cloudinary for SOS Pet's photo"
+end
+sos_pet.save!
+puts "SOS Pet Clinic created"
+
+# sospet_file_path = Rails.root.join("app/assets/images/seeds/clinics/SOSpet.png")
+# if File.exist?(sospet_file_path)
+#   sos_pet.photo.attach(
+#     io: File.open(sospet_file_path),
+#     filename: "SOSpet.png",
+#     content_type: "image/png"
+#   )
+#   sos_pet.save!
+#   puts "SOS Pet created with local photo"
+# else
+#   puts "ERROR: file not found"
+# end
+
+
+pet_protect = Clinic.create!(
   field: ["Oncology"],
   clinic_name:"PetProtect",
   contact: "contact@petprotect.com",
   species: ["cats", "dogs", "birds"],
   user: vet03
   )
+
+  # cloudinary
+pet_protect_url = "https://res.cloudinary.com/rts1307/image/upload/v1772466539/development/PetProtect.png"
+unless pet_protect.photo.attached?
+  pet_protect.photo.attach(io: URI.open(pet_protect_url), filename: "pet_protect.png", content_type: "image/png")
+  puts "Accessing cloudinary for SOS Pet's photo"
+end
+pet_protect.save!
+puts "Pet Protect Clinic created"
+
+
+# petprotect_file_path = Rails.root.join("app/assets/images/seeds/clinics/PetProtect.png")
+# if File.exist?(petprotect_file_path)
+#   pet_protect.photo.attach(
+#     io: File.open(petprotect_file_path),
+#     filename: "PetProtect.png",
+#     content_type: "image/png"
+#   )
+#   pet_protect.save!
+#   puts "Pet Protect created with local photo"
+# else
+#   puts "ERROR: file not found"
+# end
 
 puts "Finished making clinics"
 
@@ -282,6 +459,23 @@ chat3 = Chat.create!(
   pet: percy,
   archived: false
 )
+
+# puts "Creating friendship"
+
+# friendship1 = Friendship.create!(
+#   owner: katie,
+#   vet: vet01
+# )
+
+# friendship2 = Friendship.create!(
+#   owner: renato,
+#   vet: vet01
+# )
+
+# friendship3 = Friendship.create!(
+#   owner: katie,
+#   vet: vet01
+# )
 
 puts "Creating messages..."
 
