@@ -33,23 +33,24 @@ export default class extends Controller {
   }
 
   applyToMessage(message) {
-    // prevent double-processing
-    if (message.dataset.processed === "true") return
-    message.dataset.processed = "true"
-
     const senderId = message.dataset.userId
     const senderRole = message.dataset.userRole
 
     const bubble = message.querySelector(".msg")
     const avatarSlot = message.querySelector(".avatar-slot")
+    const row = message
 
     const fromMe = senderId === this.viewerId
 
-    /* alignment */
+    // RESET CLASSES FIRST
+    row.classList.remove("msg-left", "msg-right")
+    bubble.classList.remove("msg-left", "msg-right")
+
+    // APPLY CORRECT SIDE
     row.classList.add(fromMe ? "msg-right" : "msg-left")
     bubble.classList.add(fromMe ? "msg-right" : "msg-left")
 
-    /* avatar (ROLE-BASED) */
+    // AVATAR
     const avatarSrc =
       senderRole === "vet"
         ? "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg"

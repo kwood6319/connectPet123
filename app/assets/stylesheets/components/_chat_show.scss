@@ -38,60 +38,60 @@ body {
 
 // messages
 
-.msg {
-  position: relative;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 1.4;
-  max-width: 70%;
-  padding: 12px 18px;
-  margin-bottom: 10px;
-  z-index: 1;
-  font-weight: bold;
-}
+// .msg {
+//   position: relative;
+//   border-radius: 8px;
+//   font-size: 14px;
+//   line-height: 1.4;
+//   max-width: 70%;
+//   padding: 12px 18px;
+//   margin-bottom: 10px;
+//   z-index: 1;
+//   font-weight: bold;
+// }
 
-.msg-right {
-  background: #6aa98f;
-}
+// .msg-right {
+//   background: #6aa98f;
+// }
 
-.msg-right::after {
-  content: "";
-  position: absolute;
-  right: -5px;            /* move outside bubble */
-  top: 50%;               /* vertical center */
-  transform: translateY(-50%) rotate(150deg);
-  width: 12px;
-  height: 12px;
-  background: #6aa98f;
-  border-radius: 0 100% 100% 100%;
-  z-index: -1;
-}
+// .msg-right::after {
+//   content: "";
+//   position: absolute;
+//   right: -5px;            /* move outside bubble */
+//   top: 50%;               /* vertical center */
+//   transform: translateY(-50%) rotate(150deg);
+//   width: 12px;
+//   height: 12px;
+//   background: #6aa98f;
+//   border-radius: 0 100% 100% 100%;
+//   z-index: -1;
+// }
 
-.msg-left {
-  background: #A3B899;
-}
+// .msg-left {
+//   background: #A3B899;
+// }
 
-.msg-left::after{
-  content: "";
-  position: absolute;
-  left: -5px;            /* move outside bubble */
-  top: 50%;               /* vertical center */
-  transform: translateY(-50%) rotate(330deg);
-  width: 12px;
-  height: 12px;
-  background: #A3B899;
-  border-radius: 0 100% 100% 100%;
-}
+// .msg-left::after{
+//   content: "";
+//   position: absolute;
+//   left: -5px;            /* move outside bubble */
+//   top: 50%;               /* vertical center */
+//   transform: translateY(-50%) rotate(330deg);
+//   width: 12px;
+//   height: 12px;
+//   background: #A3B899;
+//   border-radius: 0 100% 100% 100%;
+// }
 
-p {
-  margin-bottom: 0;
-}
+// p {
+//   margin-bottom: 0;
+// }
 
-.col-2:has(.left-avatar),
-.col-2:has(.right-avatar) {
-  padding-left: 0;
-  padding-right: 0;
-}
+// .col-2:has(.left-avatar),
+// .col-2:has(.right-avatar) {
+//   padding-left: 0;
+//   padding-right: 0;
+// }
 
 .avatar-chat {
   width: 50px;
@@ -100,17 +100,61 @@ p {
   object-fit: cover;
 }
 
-.avatar-col {
-  flex: 0 0 60px;
-  max-width: 60px;
+// .avatar-col {
+//   flex: 0 0 60px;
+//   max-width: 60px;
+// }
+
+// .right-avatar{
+//   margin-left: 0.75rem;
+// }
+
+// .left-avatar{
+//   margin-right: 0.75rem;
+// }
+
+.message {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
 }
 
-.right-avatar{
-  margin-left: 0.75rem;
+/* LEFT MESSAGE */
+.msg-left {
+  justify-content: flex-start;
 }
 
-.left-avatar{
-  margin-right: 0.75rem;
+.msg-left .msg {
+  background: #f1f1f1;
+  border-radius: 15px 15px 15px 0;
+}
+
+/* RIGHT MESSAGE */
+.msg-right {
+  justify-content: flex-end;
+}
+
+.msg-right .msg {
+  background: #007bff;
+  color: white;
+  border-radius: 15px 15px 0 15px;
+}
+
+/* Avatar positioning */
+.msg-left .avatar-slot {
+  order: 0;
+}
+
+.msg-left .msg {
+  order: 1;
+}
+
+.msg-right .avatar-slot {
+  order: 1;
+}
+
+.msg-right .msg {
+  order: 0;
 }
 
 // new message
