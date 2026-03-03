@@ -12,6 +12,7 @@ class PetsController < ApplicationController
       @pets = @user.pets
       @title = "Your Pets!"
     end
+    @clinics = Clinic.all
   end
 
   # GET /users/:user_id/pets/:id

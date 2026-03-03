@@ -2,9 +2,10 @@
   <h1 class="index-title"><%= @title %></h1>
   <div class="pet-cards-wrapper">
     <% @pets.each do |pet| %>
-      <%= link_to user_pet_path(current_user, pet), class: "card-index-link" do %>
+
+      <%# Defining card content to not repeat %>
+      <% card_content = capture do %>
         <div class="card-index">
-          <%# Protecting view from nil data %>
           <% if pet&.photo&.attached? %>
             <%= cl_image_tag pet.photo.key, crop: :fill, class: "avatar-index-large" %>
           <% else %>
@@ -12,38 +13,68 @@
               <i class="fa-solid fa-paw"></i>
             </div>
           <% end %>
+
           <div class="name-section-wrapper">
             <h2 class="pet-name-index"><%= pet.name %></h2>
           </div>
 
+          <%# icons: calendar and restore %>
           <% if @title == "Your Pets!" %>
             <i class="fa-solid fa-calendar-plus"
-             onclick="event.preventDefault(); window.location.href='<%= new_user_pet_log_path(current_user, pet) %>';">
+               onclick="event.preventDefault(); window.location.href='<%= new_user_pet_log_path(current_user, pet) %>';">
             </i>
-          <% else %>
+          <% elsif @title == "Heart Gallery" %>
+            <%# Only shows button to restore if in the Heart Gallery %>
             <%= button_to unarchive_user_pet_path(current_user, pet),
               method: :patch,
-              style: "background-color: #A3B899; border: none; border-radius: 5px; padding: 5px; cursor: pointer;",
               class: "btn-reset-icon",
-              form: { onclick: "event.stopPropagation();", style: "display:inline; background-color: #A3B899;  border: none; border-radius: 5px; padding: 5px; cursor: pointer;" },
+              style: "background-color: #A3B899; border: none; border-radius: 5px; padding: 5px; cursor: pointer;",
+              form: { onclick: "event.stopPropagation();", style: "display:inline; background-color: #A3B899; border: none; border-radius: 5px; padding: 5px; cursor: pointer;" },
               data: { turbo_confirm: "Restore #{pet.name}?" } do %>
                 <i class="fa-solid fa-arrow-rotate-left"></i>
-              <% end %>
+            <% end %>
           <% end %>
         </div>
       <% end %>
+
+      <%# If the pet is not in the heart gallery, there is a link to profile %>
+      <% if @title == "Your Pets!" %>
+        <%= link_to user_pet_path(current_user, pet), class: "card-index-link" do %>
+          <%= card_content %>
+        <% end %>
+      <% else %>
+        <%= card_content %>
+      <% end %>
+
     <% end %>
   </div>
 
+  <%# Clinics %>
   <% if @title == "Your Pets!" %>
-  <h3 class="mt-4">Your Connected Veterinarians</h3>
-  <div class="vet-card-custom">
-    <%= image_tag "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg", class: "avatar-vet" %>
-    <div class="name-section-wrapper">
-      <div class="vet-name-index">Patrick Gregory House</div>
-      <div class="vet-languages">Languages: English, Spanish</div>
+    <h3 class="index-title">Your Connected Veterinarians</h3>
+    <div class="vet-cards-wrapper">
+      <% @clinics.each do |clinic| %>
+        <%= link_to clinic_path(clinic), class: "card-index-link" do %>
+          <div class="card-index">
+            <%# Protecting view from nil data %>
+            <% if clinic&.photo&.attached? %>
+              <%= cl_image_tag clinic.photo.key, crop: :fill, class: "avatar-index-large" %>
+            <% else %>
+              <div class="avatar-index-large placeholder">
+                <i class="fa-regular fa-hospital"></i>
+              </div>
+            <% end %>
+            <div class="name-section-wrapper">
+              <h3 class="vet-name-index"><%= clinic.clinic_name %></h3>
+            </div>
+
+              <i class="fa-solid fa-comment"
+               onclick="event.preventDefault(); window.location.href='<%= new_user_chat_path(current_user) %>';">
+              </i>
+
+          </div>
+        <% end %>
+      <% end %>
     </div>
-    <i class="fa-solid fa-comment"></i>
-  </div>
   <% end %>
 </div>
