@@ -3,7 +3,6 @@
     <div class="modal-card">
       <div class="modal-header">
         <h2 class="modal-title">Update <%= params[:field].to_s.humanize %></h2>
-        <button type="button" class="close-btn" data-action="click->modal#close">&times;</button>
       </div>
       <%= form_with model: [@user, @pet], class: "modal-form", data: { turbo_frame: "_top" } do |f| %>
         <%= hidden_field_tag :field, params[:field] %>
