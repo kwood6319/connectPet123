@@ -13,42 +13,17 @@
   </div>
 </div>
 <div class="msg-container-wrapper">
-  <div class="msg-container" id="chat-messages" data-controller="scroll">
-    <% @messages.each do |message| %>
-      <% if message.user == @user %>
-        <div class="row mx-2 justify-content-center">
-          <div class="msg msg-right col-10">
-            <p> <%= message.contents %> </p>
-          </div>
-          <div class="col-2">
-
-            <%# Verifying if the pet exists and has a picture %>
-            <% if @chat.pet&.photo&.attached? %>
-              <%= image_tag @chat.pet.photo,
-                  class: "avatar-small right-avatar",
-                  style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
-            <% else %>
-              <div class="avatar-small overlap" style="width: 50px; height: 50px; border-radius: 50%; background: #eee; display: inline-flex; align-items: center; justify-content: center; border: 2px solid white;">
-                <i class="fa-solid fa-paw" style="color: #bbb;"></i>
-              </div>
-            <% end %>
-
-        </div>
-      <% else %>
-        <div class="row mx-2 justify-content-center">
-          <div class="col-2">
-            <%# Image placeholder %>
-            <%= image_tag "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg",
-                class: "avatar-small left-avatar", style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
-          </div>
-          <div class="msg msg-left col-10">
-            <p>
-              <%= message.contents %>
-            </p>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
+  <%= turbo_stream_from "chat_#{@chat.id}" %>
+  <%# Subscribes the container to the turbostream that checks for new messages  %>
+  <div
+  class="msg-container"
+  id="chat-messages"
+  data-controller="scroll messages"
+  data-viewer-id="<%= current_user.id %>"
+  data-pet-photo-url="<%= url_for(@chat.pet.photo) %>">
+    <%# data-controller adds controllers for both "scroll" and "messages" %>
+    <%= render @messages, viewer_id: current_user.id %>
+    <%# Renders the messages partial %>
     <div class="chat-bottom"> </div>
   </div>
   <%= form_with model: [@user, @chat, @message] do |f| %>
@@ -58,3 +33,29 @@
     </button>
   <% end %>
 </div>
+<style>
+  .message-row {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+  }
+
+  /* RIGHT (from me) */
+  .message-row.msg-right {
+    flex-direction: row-reverse;
+  }
+
+  /* LEFT (from them) */
+  .message-row.msg-left {
+    flex-direction: row;
+  }
+
+  /* spacing */
+  .message-row.msg-right .avatar-chat {
+    margin-left: 0.75rem;
+  }
+
+  .message-row.msg-left .avatar-chat {
+    margin-right: 0.75rem;
+  }
+</style>

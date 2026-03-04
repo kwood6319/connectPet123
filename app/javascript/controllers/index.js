@@ -16,5 +16,5 @@ application.register("modal", ModalController)
 import RatingController from "./rating_controller"
 application.register("rating", RatingController)
 
-import ScrollController from "./scroll_controller"
-application.register("scroll", ScrollController)
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
+eagerLoadControllersFrom("controllers", application)
