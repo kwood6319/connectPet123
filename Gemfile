@@ -57,7 +57,10 @@ gem "cloudinary"
 # Creates PDF files
 gem 'wicked_pdf'
 # Underlying binary needed for previous gem
-gem 'wkhtmltopdf-binary'
+# gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary', group: [:development, :test]
+gem 'wkhtmltopdf-heroku', group: :production
+
 
 group :development, :test do
   gem "dotenv-rails"
