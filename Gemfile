@@ -60,6 +60,7 @@ gem 'wicked_pdf'
 # gem 'wkhtmltopdf-binary'
 gem 'wkhtmltopdf-binary', group: [:development, :test]
 gem 'wkhtmltopdf-heroku', group: :production
+gem 'redis'
 
 
 group :development, :test do
