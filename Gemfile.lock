@@ -363,6 +363,7 @@ GEM
       activesupport
       ostruct
     wkhtmltopdf-binary (0.12.6.10)
+    wkhtmltopdf-heroku (3.0.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.7.4)
@@ -406,6 +407,7 @@ DEPENDENCIES
   web-console
   wicked_pdf
   wkhtmltopdf-binary
+  wkhtmltopdf-heroku
 
 CHECKSUMS
   actioncable (7.1.6) sha256=ad428d5f0a810452160820ae3cf3d9d68d8f59e7c76de3bd1f1de2a5ad03c3da
@@ -548,6 +550,7 @@ CHECKSUMS
   websocket-extensions (0.1.5) sha256=1c6ba63092cda343eb53fc657110c71c754c56484aad42578495227d717a8241
   wicked_pdf (2.8.2) sha256=648d9b0cec5a34adbc9bbf809731052a78119e2d6d323b9e4aa1383e1d683824
   wkhtmltopdf-binary (0.12.6.10) sha256=863060a4559253d20f9a73c76106bd972a443aec9fdd5013b45e1d1a9a44f352
+  wkhtmltopdf-heroku (3.0.0) sha256=417b5241cc1d976368ffcf3b35658d64c34c1e8adb8b3d7d29dfe18e8f797219
   xpath (3.2.0) sha256=6dfda79d91bb3b949b947ecc5919f042ef2f399b904013eb3ef6d20dd3a4082e
   zeitwerk (2.7.4) sha256=2bef90f356bdafe9a6c2bd32bcd804f83a4f9b8bc27f3600fff051eb3edcec8b
 
