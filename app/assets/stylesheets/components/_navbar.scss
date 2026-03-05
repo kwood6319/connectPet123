@@ -1,40 +1,52 @@
-  .navbar-connectpet {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  width: 100% !important;
-  padding: 10px 20px;
-  background-color: #4a6755;
-  position: sticky;
+.pet-nav-header {
+  background-color: $forest-moss;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  position: fixed;
   top: 0;
-  z-index: 1000;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  height: 66px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
-  .navbar-brand {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
+  .nav-content {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 25px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  color: white !important;
-  text-decoration: none !important;
-  font-weight: 700 !important;
-
-  white-space: nowrap !important;
-  min-width: max-content !important;
-  overflow: visible !important;
-
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-
-  i {
-    color: white !important;
+    a {
+      color: white;
+      text-decoration: none;
+      &:hover { color: rgba(255, 255, 255, 0.8); }
+    }
   }
-}
 
+  .nav-brand-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+    font-size: 1.3rem;
+
+    i {
+      font-size: 0.9em;
+      color: white;
+    }
+  }
 
   .nav-link-custom {
-    flex: 0 0 auto !important;
-    i.fa-bars { color: white !important; font-size: 1.5rem; }
+    i.fa-bars {
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+    }
   }
 }
 
@@ -42,10 +54,8 @@
   background-color: white !important;
   border-radius: 12px;
   border: none;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   padding: 8px 0;
-
-
   position: absolute;
   right: 0;
 
@@ -60,14 +70,9 @@
       color: #4a6755 !important;
     }
 
-
     &.text-danger {
       color: #b33939 !important;
-
-      &:hover {
-        background-color: #fff5f5 !important;
-        color: #d63031 !important;
-      }
+      &:hover { background-color: #fff5f5 !important; }
     }
   }
 }
