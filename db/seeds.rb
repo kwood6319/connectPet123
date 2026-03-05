@@ -13,7 +13,8 @@ puts "Cleaning database..."
 Log.destroy_all
 Message.destroy_all
 Chat.destroy_all
-Clinic.all.each { |clinic| clinic.photo.purge } #delete the register in db and the file in cloudinary
+#delete the register in db and the file in cloudinary
+Clinic.all.each { |clinic| clinic.photo.purge }
 Clinic.destroy_all
 Pet.all { |pet| pet.photo.purge }
 Pet.destroy_all
@@ -228,8 +229,8 @@ lewagon = Clinic.create!(
   user: vet01
   )
 
-# cloudinary
-lewagon_url = "https://res.cloudinary.com/rts1307/image/upload/v1772466537/development/LewagonPetClinic.png"
+# cloudinary.
+lewagon_url = "https://res.cloudinary.com/rts1307/image/upload/v1772465817/original/LewagonPetClinic.png"
 lewagon.photo.attach(io: URI.open(lewagon_url), filename: "lewagon.png", content_type: "image/png")
 lewagon.save!
 puts "Le Wagon Clinic created"
@@ -243,7 +244,7 @@ sos_pet = Clinic.create!(
   )
 
 # cloudinary
-sos_pet_url = "https://res.cloudinary.com/rts1307/image/upload/v1772466538/development/SOSpet.png"
+sos_pet_url = "https://res.cloudinary.com/rts1307/image/upload/v1772465817/original/SOSpet.png"
 sos_pet.photo.attach(io: URI.open(sos_pet_url), filename: "sos_pet.png", content_type: "image/png")
 sos_pet.save!
 puts "SOS Pet Clinic created"
@@ -257,7 +258,7 @@ pet_protect = Clinic.create!(
   )
 
   # cloudinary
-pet_protect_url = "https://res.cloudinary.com/rts1307/image/upload/v1772466539/development/PetProtect.png"
+pet_protect_url = "https://res.cloudinary.com/rts1307/image/upload/v1772465818/original/PetProtect.png"
 pet_protect.photo.attach(io: URI.open(pet_protect_url), filename: "pet_protect.png", content_type: "image/png")
 pet_protect.save!
 puts "Pet Protect Clinic created"
