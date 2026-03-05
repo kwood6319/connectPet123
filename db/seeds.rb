@@ -4,12 +4,20 @@ puts "Cleaning database..."
 
 # Wipes all data from the tables, resets auto-incrementing IDs, and bypasses foreign key constraints.
 # Instead of asking Rails to destroy objects one by one, send a command directly to the database engine.
-connection = ActiveRecord::Base.connection
+# connection = ActiveRecord::Base.connection
 # TRUNCATE: Removes all records from a table without processing each one individually(fast).
 # RESTART IDENTITY: Clears all data, resets IDs to 1.
 # CASCADE: Ignores link errors between tables.
-connection.execute("TRUNCATE messages, logs, friendships, chats, pets, clinics, users RESTART IDENTITY CASCADE")
+# connection.execute("TRUNCATE messages, logs, friendships, chats, pets, clinics, users RESTART IDENTITY CASCADE")
 
+Log.destroy_all
+Message.destroy_all
+Chat.destroy_all
+Clinic.all.each { |clinic| clinic.photo.purge } #delete the register in db and the file in cloudinary
+Clinic.destroy_all
+Pet.all { |pet| pet.photo.purge }
+Pet.destroy_all
+User.destroy_all
 
 puts "Database cleaned! Creating new data..."
 
