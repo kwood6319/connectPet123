@@ -1,3 +1,8 @@
+<% reactions = ["fa-face-tired",
+    "fa-face-frown",
+    "fa-face-meh",
+    "fa-face-smile",
+    "fa-face-grin-wide" ]%>
 <div class= "pet-show-container">
   <section class="pet-hero-section">
     <div class="avatar-carousel">
@@ -37,7 +42,7 @@
                 data-rating-text-value="<%= "#{value} attr#{i}" %>"
                 data-action="click->rating#select"
                 data-rating-target="button">
-                <%= value %>
+                <i class="fa-regular <%=reactions[value - 1]%> fa-lg"></i>
               </button>
             <% end %>
           </div>
