@@ -10,6 +10,9 @@ application.register("carousel", CarouselController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
 import RatingController from "./rating_controller"
 application.register("rating", RatingController)
 

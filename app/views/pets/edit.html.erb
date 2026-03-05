@@ -1,0 +1,35 @@
+<%= turbo_frame_tag "modal" do %>
+  <div data-controller="modal" data-action="mousedown->modal#closeBackground">
+    <div>
+      <%= form_with model: [@user, @pet], class: "modal-form", data: { turbo_frame: "_top" } do |f| %>
+        <%= hidden_field_tag :field, params[:field] %>
+        <div>
+          <% case params[:field] %>
+          <% when 'dob' %>
+            <label>Date of Birth</label>
+            <%= f.date_field :dob, autofocus: true %>
+          <% when 'vacc_status' %>
+            <label class="form-label">Vaccination Status</label>
+            <%= f.text_field :vacc_status, autofocus: true %>
+          <% when 'microchip' %>
+            <label class="form-label">Microchip Number</label>
+            <%= f.text_field :microchip, autofocus: true %>
+          <% when 'weight' %>
+            <label class="form-label">Weight (kg)</label>
+            <%= f.number_field :weight, step: 0.1, autofocus: true %>
+          <% when 'current_meds' %>
+            <label class="form-label">Medications</label>
+            <%= f.text_area :current_meds, rows: 3, autofocus: true %>
+          <% when 'notes' %>
+            <label class="form-label">Notes</label>
+            <%= f.text_area :notes, rows: 4, autofocus: true %>
+          <% end %>
+        </div>
+        <div>
+          <%= f.submit "Save Changes" %>
+          <button type="button" data-action="click->modal#close">Cancel</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

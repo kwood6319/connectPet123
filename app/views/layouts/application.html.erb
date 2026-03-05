@@ -17,5 +17,6 @@
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
     <%= yield %>
+    <%= turbo_frame_tag "modal" %>
   </body>
 </html>

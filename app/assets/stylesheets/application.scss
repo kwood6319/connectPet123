@@ -17,7 +17,6 @@
 @import "components/avatar";
 @import "components/cards";
 @import "components/buttons";
-@import "components/layout";
 @import "pages/show";
 @import "components/log_rating";
 @import "components/avatar_carousel";
@@ -58,4 +57,8 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-// comment
+
+body {
+  padding-top: 66px !important;
+  margin: 0;
+}

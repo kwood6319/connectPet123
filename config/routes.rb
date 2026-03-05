@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   resources :clinics, only: [:index, :show] #showing the clinics to all
   resources :users, only: [:show, :new, :create] do
-    resources :pets, only: [:show, :new, :create, :index] do
+    resources :pets, only: [:show, :new, :create, :index, :edit, :update] do
       member do
       # Add route /users/:user_id/pets/:id/archive
         patch :archive
