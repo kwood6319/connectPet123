@@ -1,15 +1,15 @@
-<div class="chat-subnav row">
-  <div class="col-1">
-    <%= link_to user_chats_path(@user) do %>
+<div class="chat-subnav"> 
+  <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+    <%= link_to user_chats_path(@user), style: "color: #4a6755;" do %>
       <i class="fa-solid fa-chevron-left"></i>
     <% end %>
-  </div>
-  <div class="col-11">
-    <% if @user == @chat.owner %>
-      <%= @chat.vet.clinic.clinic_name %>
-    <% else %>
-      <%= @chat.owner.name %>: <%= @chat.pet.name || "Unknow pet"%>
-    <% end %>
+    <span style="font-weight: 600; font-size: 1.1rem;">
+      <% if @user == @chat.owner %>
+        <%= @chat.vet.clinic.clinic_name %>
+      <% else %>
+        <%= @chat.owner.name %>: <%= @chat.pet.name || "Unknown pet"%>
+      <% end %>
+    </span>
   </div>
 </div>
 <div class="msg-container-wrapper">
